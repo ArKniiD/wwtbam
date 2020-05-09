@@ -1,0 +1,14 @@
+<div id="call-joker" (click)="useCallJoker()" [class]="callJokerUsed ? 'joker-used' : ''">
+  <canvas #canvas></canvas>
+</div>
+<div id="poll-joker" (click)="usePollJoker()" [class]="pollJokerUrl !== '' ? 'joker-used' : ''">
+  <div *ngIf="pollJokerUrl===''; then icon else link"></div>
+  <ng-template #icon><i class="fas fa-poll"></i></ng-template>
+  <ng-template #link>
+    <a [href]="pollJokerUrl" target="_blank">
+      <i class="fas fa-poll"></i>
+    </a></ng-template>
+</div>
+<div id="fifty-fifty-joker" (click)="useFiftyFiftyJoker()" [class]="fiftyFiftyJokerUsed ? 'joker-used' : ''">
+  <img src="assets/img/Classic5050.png">
+</div>

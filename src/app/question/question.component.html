@@ -1,0 +1,32 @@
+<div id="content">
+  <h1 class="title">{{getTitle}}</h1>
+  <img src="../../assets/img/jpf.jpg">
+  <div id="question">
+    <div id="question_label"><p>{{question.label}}</p></div>
+  </div>
+  <div id="answers">
+    <div class="row">
+      <div id="answer-a" [class]="answerClasses[0]" (click)="selectAnswer(0)">
+        <span>A</span><p>{{question.answers[0]}}</p>
+      </div>
+      <div id="answer-b" [class]="answerClasses[1]" (click)="selectAnswer(1)">
+        <span>B</span><p>{{question.answers[1]}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div id="answer-c" [class]="answerClasses[2]"  (click)="selectAnswer(2)">
+        <span>C</span><p>{{question.answers[2]}}</p>
+      </div>
+      <div id="answer-d" [class]="answerClasses[3]"  (click)="selectAnswer(3)">
+        <span>D</span><p>{{question.answers[3]}}</p>
+      </div>
+    </div>
+  </div>
+  <div id="validate">
+    <div [class]="isThisYourLastWord ? 'enabled': 'disabled'">
+      <div [class]="isThisYourLastWord ? 'last-word last-word__enabled': 'last-word'" (click)="lastWord()">
+        <p>C'est mon dernier mot !</p>
+      </div>
+    </div>
+  </div>
+</div>

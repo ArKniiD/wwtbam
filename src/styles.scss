@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "DejaVu Sans Light", "Arial", sans-serif;
+  background-image: url("assets/img/background.jpg");
+  color: #FFF;
+
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: underline;
+    font-size: 3em;
+  }
+
+  img {
+    display: flex;
+    margin: auto;
+  }
+}

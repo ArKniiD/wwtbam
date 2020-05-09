@@ -1,0 +1,55 @@
+#call-joker{
+  cursor: pointer;
+  margin: 30px auto;
+  width: 200px;
+}
+
+#call-joker.joker-used {
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+#poll-joker {
+  cursor: pointer;
+  margin: 30px auto;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  color: #f89b1c;
+
+  i {
+    font-size: 12em;
+    margin: auto;
+  }
+
+  a {
+    margin: auto;
+  }
+}
+
+#poll-joker.joker-used {
+  a {
+    color: #FFFFFF !important;
+    transition: 0.5s;
+  }
+
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+
+#fifty-fifty-joker {
+  display: flex;
+  cursor: pointer;
+
+  img {
+    width: 200px;
+    margin: auto;
+  }
+}
+
+#fifty-fifty-joker.joker-used {
+  opacity: 0.5;
+  transition: opacity 0.5s;
+}
+

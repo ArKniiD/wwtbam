@@ -1,0 +1,67 @@
+#pyramid{
+  height: 100%;
+  width: 20%;
+  min-width: 430px;
+  position: fixed; right: -20%; top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
+  -moz-box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
+  box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
+  transition: right 0.5s;
+
+  &:hover {
+    right: 0;
+    transition: right 0.5s;
+  }
+
+  div {
+    font-weight: bold;
+    font-size: 2em;
+    color: #f89b1c;
+    height: 58px;
+    display: flex;
+    cursor: pointer;
+    transition: font-size 0.3s;
+
+    &:hover {
+      font-size: 2.2em;
+      transition: font-size 0.3s;
+    }
+
+    &.current-level {
+      background-image: url("img/question-sprite.png");
+      background-position: -68px -245px;
+      color: #FFFFFF;
+    }
+
+    p {
+      margin: auto 50px;
+      span {
+        width: 50px;
+        display: inline-block;
+        text-align: right;
+        padding-right: 10px;
+      }
+    }
+    p.level {
+      color: #FFFFFF;
+    }
+  }
+}
+
+#jokers {
+  height: 100%;
+  width: 20%;
+  min-width: 430px;
+  position: fixed; left: -20%; top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  -moz-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+  transition: left 0.5s;
+
+  &:hover {
+    left: 0;
+    transition: left 0.5s;
+  }
+}
