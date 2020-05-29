@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { PlayComponent } from './play/play.component';
 import { QuestionComponent } from './question/question.component';
 import { JokersComponent } from './jokers/jokers.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    PlayComponent,
     QuestionComponent,
     JokersComponent
   ],
@@ -19,6 +19,6 @@ import { JokersComponent } from './jokers/jokers.component';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [PlayComponent]
 })
 export class AppModule { }

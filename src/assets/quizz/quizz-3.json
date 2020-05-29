@@ -1,0 +1,167 @@
+[
+  {
+    "label": "Selon Marry Poppins, quel mot faut-il prononcer pour 'être à la page'",
+    "answers": [
+      "Hakuna Matata",
+      "Kamoulox",
+      "Schmilblik",
+      "Supercalifragilisticexpialidocious"
+    ],
+    "rightAnswer": 3,
+    "value": 0.05
+  },
+  {
+    "label": "Quel âge a Michel Drucker",
+    "answers": [
+      "7 ans",
+      "77 ans",
+      "777 ans",
+      "7777 ans"
+    ],
+    "rightAnswer": 1,
+    "value": 0.10
+  },
+  {
+    "label": "Selon d'expression, que faut-il mettre dans son vin quand on souhaite modérer ses exigences ou ses ambitions ?",
+    "answers": [
+      "Pastis",
+      "Poudre de perlimpinpin",
+      "Huile de jojoba",
+      "Eau"
+    ],
+    "rightAnswer": 3,
+    "value": 0.20
+  },
+  {
+    "label": "Suite à une homophonie, les pantoufles en vair de Cendrillon sont devenues de chaussures...",
+    "answers": [
+      "en ver",
+      "en vert",
+      "en verre",
+      "envers"
+    ],
+    "rightAnswer": 2,
+    "value": 0.50
+  },
+  {
+    "label": "Quelle est la capitale de la Suisse",
+    "answers": [
+      "Genève",
+      "Berne",
+      "St Jean de Cuculles",
+      "Gland"
+    ],
+    "rightAnswer": 1,
+    "value": 1.00
+  },
+  {
+    "label": "Que veut dire le S dans l'acronyme OMS?",
+    "answers": [
+      "Santé",
+      "Sanitaire",
+      "Sécurité",
+      "Sociale"
+    ],
+    "rightAnswer": 0,
+    "value": 2.00
+  },
+  {
+    "label": "Une seule de ces propositions concernant la sodomie est vraie ?",
+    "answers": [
+      "Le changement d'orifice pendant l'acte est conseillé",
+      "Il est possible de tomber enceinte en la pratiquant",
+      "Elle renforce la tonicité des muscles du sphincter",
+      "80% des femmes l'ont déjà pratiquée"
+    ],
+    "rightAnswer": 2,
+    "value": 4.00
+  },
+  {
+    "label": "Que célèbre-t-on le 8 mai en France ?",
+    "answers": [
+      "L'armistice de la guerre 1ere guerre mondiale",
+      "La prise de la Bastille",
+      "L'ascension",
+      "L'armistice de la guerre 2eme guerre mondiale"
+    ],
+    "rightAnswer": 3,
+    "value": 7.00
+  },
+  {
+    "label": "En 2015, le Guinness des records a attribué le record du plus long taco. A quoi était équivalente sa longueur ?",
+    "answers": [
+      "3 terrains de football",
+      "2 tours Eiffel",
+      "7 Empire State Building",
+      "5 fois mon penis"
+    ],
+    "rightAnswer": 2,
+    "value": 11.00
+  },
+  {
+    "label": "Quel basketteur a joué dans 'Y a t-il un pilote dans l'avion ?' ?",
+    "answers": [
+      "Dennis Rodman",
+      "Kareem Abdul-Jabbar",
+      "Michael Jordan",
+      "Shaquille O'Neal"
+    ],
+    "rightAnswer": 1,
+    "value": 15.00
+  },
+  {
+    "label": "En France, dans quelle ville se trouve l'adresse du père Noël ?",
+    "answers": [
+      "Strasbourg",
+      "Paris",
+      "Libourne",
+      "Narbonne"
+    ],
+    "rightAnswer": 2,
+    "value": 20.00
+  },
+  {
+    "label": "Comment se nomme le réflèxe qui fait éternuer en regardant une source lumineuse intense ?",
+    "answers": [
+      "Lumino-retinien",
+      "Parito-nasal",
+      "Sinuso-typhoïdien",
+      "Photo-sternutatoire"
+    ],
+    "rightAnswer": 3,
+    "value": 25.00
+  },
+  {
+    "label": "Qui est le Saint Patron des informaticiens et des internautes ?",
+    "answers": [
+      "Saint Hilaire de Poitiers",
+      "Saint Serge de Radonège",
+      "Saint Isidore de Séville",
+      "Saint Joseph de Copertino"
+    ],
+    "rightAnswer": 2,
+    "value": 30.00
+  },
+  {
+    "label": "A quelle étendue d'eau le morceau 'Smoke on the water' de Deep Purple fait-il allusion ?",
+    "answers": [
+      "Le lac Léman",
+      "Le lac Titicaca",
+      "Le lac Victoria",
+      "Le Loch Ness"
+    ],
+    "rightAnswer": 0,
+    "value": 40.00
+  },
+  {
+    "label": "Quelle est la formule chimique de la testostérone ?",
+    "answers": [
+      "C8H10N4O2",
+      "C3H5N3O9",
+      "C17H19NO3",
+      "C19H28O2"
+    ],
+    "rightAnswer": 3,
+    "value": 50.00
+  }
+]

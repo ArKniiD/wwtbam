@@ -37,6 +37,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   private title = 'Qui veut gagner des boissons ?';
 
   private selectedAnswer = -1;
+  private jpf = 0;
 
   private questionSubscription: Subscription;
   private answerRemoverSubscription: Subscription;
@@ -49,6 +50,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
       this.question = q;
       this.selectedAnswer = -1;
       this.hideAnswers();
+      this.jpf = Math.ceil(Math.random() * 7);
     });
 
     this.answerRemoverSubscription = this.answerRemover.asObservable().subscribe(i => {

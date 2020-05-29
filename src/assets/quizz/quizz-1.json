@@ -1,0 +1,167 @@
+[
+  {
+    "label": "Complétez les paroles de cette chanson : 'Oh Djadja, Y'a pas moyen Djadja, J'suis pas ta catin Djadja genre...'",
+    "answers": [
+      "Kwa nani batchata tu perds ça",
+      "Au Canada le kaki c'est sale ça",
+      "En Catchana baby tu dead ça",
+      "On m'appelle l'OVNI"
+    ],
+    "rightAnswer": 2,
+    "value": 0.05
+  },
+  {
+    "label": "Qui a déjà été présentateur du JT de TF1 ?",
+    "answers": [
+      "Claude Sel de Guérande",
+      "Patrick Poivre d'Arvor",
+      "Marie Curry d'Inde",
+      "Mojoaz35"
+    ],
+    "rightAnswer": 1,
+    "value": 0.10
+  },
+  {
+    "label": "Quel animal n'apparait dans aucune fable de La Fontaine ?",
+    "answers": [
+      "Corbeau",
+      "Renard",
+      "Lion",
+      "Pangolin"
+    ],
+    "rightAnswer": 3,
+    "value": 0.20
+  },
+  {
+    "label": "Quelle proposition désigne un moyen d'améliorer son élocution ?",
+    "answers": [
+      "Fourchelangue",
+      "Mauvaiselangue",
+      "Virelangue",
+      "Languependue"
+    ],
+    "rightAnswer": 2,
+    "value": 0.50
+  },
+  {
+    "label": "La Chine consomme un tiers de la production mondiale de...",
+    "answers": [
+      "Riz",
+      "Beurre",
+      "Saucisson",
+      "Pâté Henaff"
+    ],
+    "rightAnswer": 0,
+    "value": 1.00
+  },
+  {
+    "label": "Quel modèle de voiture a réellement existé ?",
+    "answers": [
+      "La Skoda 'Tapina'",
+      "La Mazda 'Laputa'",
+      "La Nissan 'Gigolo'",
+      "La Toyota 'Penis'"
+    ],
+    "rightAnswer": 1,
+    "value": 2.00
+  },
+  {
+    "label": "Laquelle de ces marques d'automobiles a été la première à déposer un brevet sur la ceinture de sécurité moderne ?",
+    "answers": [
+      "Volvo",
+      "Ferrari",
+      "Fiat",
+      "Kia"
+    ],
+    "rightAnswer": 0,
+    "value": 4.00
+  },
+  {
+    "label": "Avec l'épidémie de COVID-19, la ligue 1 s'est terminée à l'issue de la 28ème journée. Où se positionne Dijon ?",
+    "answers": [
+      "13ème position",
+      "14ème position",
+      "15ème position",
+      "16ème position"
+    ],
+    "rightAnswer": 3,
+    "value": 7.00
+  },
+  {
+    "label": "Quel joueur de la NBA est correctement associé à son équipe ?",
+    "answers": [
+      "Frank Ntilikina - Knicks de New York",
+      "LeBron James - Cavaliers de Cleveland",
+      "Andre Iguodala - Warriors de Golden State",
+      "James Harden - Lakers de Los Angeles"
+    ],
+    "rightAnswer": 0,
+    "value": 11.00
+  },
+  {
+    "label": "Parmi ces valeurs de billets, laquelle trouve t-on le plus abondamment dans la zone euro ?",
+    "answers": [
+      "Billet de 5€",
+      "Billet de 10€",
+      "Billet de 50€",
+      "Billet de 100€"
+    ],
+    "rightAnswer": 2,
+    "value": 15.00
+  },
+  {
+    "label": "Lequel de ces pays ne possède qu'une seule capitale ?",
+    "answers": [
+      "Afrique du Sud",
+      "Tanzanie",
+      "Inde",
+      "Côte d'Ivoire"
+    ],
+    "rightAnswer": 2,
+    "value": 20.00
+  },
+  {
+    "label": "Quel objet est devenu le symbole du film d’animation « Akira » ?",
+    "answers": [
+      "Une mitrailleuse",
+      "Une moto rouge",
+      "Une voiture bleue",
+      "Une épée rouge"
+    ],
+    "rightAnswer": 1,
+    "value": 25.00
+  },
+  {
+    "label": "'Les chiens sont des mammifères / Les caniches sont des chiens / Les caniches sont donc des mammifères', cette suite logique est-elle…",
+    "answers": [
+      "un syllogisme",
+      "un illogisme",
+      "un contrilogisme",
+      "un antilogisme"
+    ],
+    "rightAnswer": 0,
+    "value": 30.00
+  },
+  {
+    "label": "En 1908 aux J.O., le marathon se dispute pour la première fois sur 42,195km entre...",
+    "answers": [
+      "Versailles et Paris",
+      "Le Pirée et Athènes",
+      "Windsor et Londres",
+      "Pise et Rome"
+    ],
+    "rightAnswer": 2,
+    "value": 40.00
+  },
+  {
+    "label": "Selon la légende, comment le pape Adrien IV est-il mort en 1159 ?",
+    "answers": [
+      "En chutant d'un cheval",
+      "En tombant d'un balcon",
+      "En se cognant contre une porte",
+      "En avalant une mouche"
+    ],
+    "rightAnswer": 3,
+    "value": 50.00
+  }
+]

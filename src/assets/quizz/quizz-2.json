@@ -1,0 +1,167 @@
+[
+  {
+    "label": "Que signifie ASAP ?",
+    "answers": [
+      "Aussi vite que possible",
+      "Association des saucissons avec apéritif",
+      "Association sportive des artistes peintres",
+      "Allez, soyons aussi pragmatique"
+    ],
+    "rightAnswer": 0,
+    "value": 0.05
+  },
+  {
+    "label": "De quelles viandes les Merguez sont-elles principalement constituées ?",
+    "answers": [
+      "Chien et chat",
+      "Ane et cheval",
+      "Boeuf et mouton",
+      "De bons haloufs"
+    ],
+    "rightAnswer": 2,
+    "value": 0.10
+  },
+  {
+    "label": "Quelle partie de l'oeuf dois-je cuisiner pour préparer avec succès une mayonnaise ?",
+    "answers": [
+      "Rouge",
+      "Jaune",
+      "Bleu",
+      "Vert"
+    ],
+    "rightAnswer": 1,
+    "value": 0.20
+  },
+  {
+    "label": "L'un des plus grands chefs-d'oeuvre de la littérature de la Grèce antique est...",
+    "answers": [
+      "L'Odyssée de Homère",
+      "L'expédition de Bart",
+      "La Thalassothérapie de Marge",
+      "Le Road-trip de Moe"
+    ],
+    "rightAnswer": 0,
+    "value": 0.50
+  },
+  {
+    "label": "Quelles couleurs Jeanne Mas et Stendhal ont-ils en commun ?",
+    "answers": [
+      "Le jaune et le vert",
+      "Le bleu, le blanc et le rouge",
+      "Le taupe et le turquoise",
+      "Le rouge et le noir"
+    ],
+    "rightAnswer": 3,
+    "value": 1.00
+  },
+  {
+    "label": "Quel est le vrai nom de Molière ?",
+    "answers": [
+      "Jean-Philippe Smet",
+      "Jean-Baptiste Poquelin",
+      "Baptiste Lecaplain",
+      "Orgon Pernelle"
+    ],
+    "rightAnswer": 1,
+    "value": 2.00
+  },
+  {
+    "label": "A quelles attaques les Pokémon de type Normal sont-ils immunisés ?",
+    "answers": [
+      "Combat",
+      "Spectre",
+      "Ténèbres",
+      "Feu"
+    ],
+    "rightAnswer": 1,
+    "value": 4.00
+  },
+  {
+    "label": "Quel tournoi du Grand Chelem démarre le plus tard dans l'année ?",
+    "answers": [
+      "Wimbledon",
+      "Open d'Australie",
+      "Roland-Garros",
+      "US Open"
+    ],
+    "rightAnswer": 3,
+    "value": 7.00
+  },
+  {
+    "label": "Quelle expression francaise traduit le mieux le terme 'YOLO' ?",
+    "answers": [
+      "Brûler la chandelle par les deux bouts",
+      "Pas piqué des hannetons",
+      "A chaque jour suffit sa peine",
+      "A l'impossible nul n'est tenu"
+    ],
+    "rightAnswer": 0,
+    "value": 11.00
+  },
+  {
+    "label": "Lequel de ces aliments est le plus riche en vitamine C ?",
+    "answers": [
+      "Orange",
+      "Choux de Bruxelles cuit",
+      "Poivron cru",
+      "Goyave"
+    ],
+    "rightAnswer": 2,
+    "value": 15.00
+  },
+  {
+    "label": "Lequel de ces fromages n'est pas une AOP suisse ?",
+    "answers": [
+      "Le Gruyère",
+      "L'Emmental",
+      "Le mont d'Or",
+      "Le Raclette du Valais"
+    ],
+    "rightAnswer": 2,
+    "value": 20.00
+  },
+  {
+    "label": "Quelle est la monnaie du Brésil ?",
+    "answers": [
+      "Le Peso",
+      "Le Real",
+      "Le Rio",
+      "Le Sol"
+    ],
+    "rightAnswer": 1,
+    "value": 25.00
+  },
+  {
+    "label": "Parmi ces disciplines, laquelle ne figurera pas au programme des prochains jeux olympiques de Tokyo ?",
+    "answers": [
+      "Dressage",
+      "Softball",
+      "Sumo",
+      "Water-Polo"
+    ],
+    "rightAnswer": 2,
+    "value": 30.00
+  },
+  {
+    "label": "Depuis 1888, quelle équipe de football du championnat anglais cumule le plus de point ?",
+    "answers": [
+      "Liverpool FC",
+      "Everton FC",
+      "Manchester United",
+      "Mancherster City"
+    ],
+    "rightAnswer": 0,
+    "value": 40.00
+  },
+  {
+    "label": "Que signifie les initiales M&M ?",
+    "answers": [
+      "Michael Amzalag & Mathias Augustyniak",
+      "Mars & Murries",
+      "Mattew & Michael",
+      "Miller & Mc Gregor"
+    ],
+    "rightAnswer": 1,
+    "value": 50.00
+  }
+]

@@ -1,34 +1,43 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import Quizz from '../assets/quizz.json';
-import { Question } from './models/question';
+import { BehaviorSubject, Subject, pipe } from 'rxjs';
+import { Question } from '../models/question';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { QuizzService } from '../services/quizz.service';
+import { switchMap, filter, first } from 'rxjs/operators';
 
 
 export enum KEY_CODE {
-  ONE = 97,
-  TWO = 98,
-  THREE = 99,
-  FOUR = 100,
-  FIVE = 101
+  ONE = 49,
+  TWO = 50,
+  THREE = 51,
+  FOUR = 52,
+  FIVE = 53,
+  SIX = 54,
+  SEVEN = 55,
+  HEIGHT = 56
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'play',
+  templateUrl: './play.component.html',
+  styleUrls: ['./play.component.scss']
 })
-export class AppComponent implements OnInit {
+export class PlayComponent implements OnInit {
   @ViewChild('commercial', { static: true }) commercialBreak: ElementRef<HTMLAudioElement>;
   @ViewChild('correct', { static: true }) correctAnswer: ElementRef<HTMLAudioElement>;
   @ViewChild('wrong', { static: true }) wrongAnswer: ElementRef<HTMLAudioElement>;
   @ViewChild('final', { static: true }) finalAnswer: ElementRef<HTMLAudioElement>;
   @ViewChild('phone', { static: true }) phoneCall: ElementRef<HTMLAudioElement>;
   @ViewChild('fifty', { static: true }) fiftyFifty: ElementRef<HTMLAudioElement>;
+  @ViewChild('lowstress', { static: true }) lowStress: ElementRef<HTMLAudioElement>;
+  @ViewChild('mediumstress', { static: true }) mediumStress: ElementRef<HTMLAudioElement>;
+  @ViewChild('highstress', { static: true }) highStress: ElementRef<HTMLAudioElement>;
+
 
   questionSubject: BehaviorSubject<Question>;
   answerRemover: Subject<number>;
   title = 'wwtbam';
-  currentQuestion = 0;
+  currentQuestion: number
   questions: Question[];
 
   private readingCommercial = true;
@@ -37,10 +46,16 @@ export class AppComponent implements OnInit {
   private readingFinalAnswer = false;
   private readingPhoneCall = false;
   private readingFiftyFifty = false;
+  private readingLowStress = false;
+  private readingMediumStress = false;
+  private readingHighStress = false;
 
-  constructor() {
-    this.questions = Quizz;
-    this.questionSubject = new BehaviorSubject(this.questions[this.currentQuestion]);
+  constructor(private route: ActivatedRoute, private quizzService: QuizzService) {
+    this.questions = [{
+      label: '',
+      answers: []
+    }];
+    this.questionSubject = new BehaviorSubject(this.questions[0]);
     this.answerRemover = new Subject();
   }
 
@@ -50,6 +65,16 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParamMap.pipe(
+      filter((params: ParamMap) => params.get('quizz') !== null),
+      switchMap((params: ParamMap) => {
+        return this.quizzService.getQuizz(`quizz-${params.get('quizz')}`);
+      }),
+      first()
+    ).subscribe(questions => {
+      this.questions = questions;
+      this.selectQuestion(0);
+    });
     this.playCommercialBreak();
   }
 
@@ -113,6 +138,36 @@ export class AppComponent implements OnInit {
     }
   }
 
+  playLowStress() {
+    this.lowStress.nativeElement.load();
+    if (!this.readingLowStress) {
+      this.lowStress.nativeElement.play();
+      this.readingLowStress = true;
+    } else {
+      this.readingLowStress = false;
+    }
+  }
+
+  playMediumStress() {
+    this.mediumStress.nativeElement.load();
+    if (!this.readingMediumStress) {
+      this.mediumStress.nativeElement.play();
+      this.readingMediumStress = true;
+    } else {
+      this.readingMediumStress = false;
+    }
+  }
+
+  playHighStress() {
+    this.highStress.nativeElement.load();
+    if (!this.readingHighStress) {
+      this.highStress.nativeElement.play();
+      this.readingHighStress = true;
+    } else {
+      this.readingHighStress = false;
+    }
+  }
+
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
     switch (event.keyCode) {
@@ -131,6 +186,15 @@ export class AppComponent implements OnInit {
       case KEY_CODE.FIVE:
         this.playPhoneCall();
         break;
+      case KEY_CODE.SIX:
+        this.playLowStress();
+        break;
+      case KEY_CODE.SEVEN:
+          this.playMediumStress();
+          break;
+      case KEY_CODE.HEIGHT:
+          this.playHighStress();
+          break;
       default:
         console.error('Unrecognized key', event);
     }
@@ -164,7 +228,7 @@ export class AppComponent implements OnInit {
     this.play5050();
     let indexes = [0, 1, 2, 3].filter(i => i !== this.questionSubject.getValue().rightAnswer);
     const indexToKeep = Math.floor(Math.random() * indexes.length);
-    indexes = indexes.filter(i => indexToKeep !== i)
+    indexes.splice(indexToKeep, 1);
     indexes.forEach(i => this.answerRemover.next(i));
   }
 }

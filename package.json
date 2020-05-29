@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "chrome": "c\\Program\\ Files\\ \\(x86\\)/Google/Chrome/Application/chrome.exe --allow-file-access-from-files --disable-web-security --user-data-dir='C:/chrome_dev_session' C:/Users/nhall/Desktop/wwtbam/dist/wwtbam/index.html"
   },
   "private": true,
   "dependencies": {
