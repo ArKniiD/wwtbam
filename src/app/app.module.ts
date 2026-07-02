@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,17 +8,14 @@ import { QuestionComponent } from './question/question.component';
 import { JokersComponent } from './jokers/jokers.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
     PlayComponent,
     QuestionComponent,
     JokersComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [PlayComponent]
 })
 export class AppModule { }

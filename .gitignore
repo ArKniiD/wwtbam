@@ -7,6 +7,10 @@
 # Only exists if Bazel was run
 /bazel-out
 
+# Angular
+/.angular/cache
+/.nx/cache
+
 # dependencies
 /node_modules
 
@@ -44,3 +48,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/.playwright/
+
+/src/environments/*

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { Component, DestroyRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Question } from '../models/question';
 
 export enum AnswerState {
@@ -12,55 +13,59 @@ export enum AnswerState {
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss']
+  styleUrls: ['./question.component.scss'],
+  standalone: true
 })
-export class QuestionComponent implements OnInit, OnDestroy {
+export class QuestionComponent implements OnInit {
   @Input()
-  questionSubject: BehaviorSubject<Question>;
+  questionSubject: BehaviorSubject<Question> = new BehaviorSubject<Question>({
+    label: '',
+    answers: []
+  });
 
   @Input()
-  answerRemover: Subject<number>;
+  answerRemover: Subject<number> = new Subject<number>();
 
   @Output()
-  wrongAnswered = new EventEmitter<any>();
+  wrongAnswered = new EventEmitter<void>();
 
   @Output()
-  correctAnswered = new EventEmitter<any>();
+  correctAnswered = new EventEmitter<void>();
 
   @Output()
-  answerSelected = new EventEmitter<any>();
+  answerSelected = new EventEmitter<void>();
 
-  question: Question;
+  question: Question = {
+    label: '',
+    answers: []
+  };
 
   answerClasses: string[] = [];
 
   private title = 'Qui veut gagner des boissons ?';
 
   private selectedAnswer = -1;
-  private jpf = 0;
+  jpf = 0;
 
-  private questionSubscription: Subscription;
-  private answerRemoverSubscription: Subscription;
-
-  constructor() {
-  }
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.questionSubscription = this.questionSubject.asObservable().subscribe(q => {
-      this.question = q;
-      this.selectedAnswer = -1;
-      this.hideAnswers();
-      this.jpf = Math.ceil(Math.random() * 7);
-    });
+    this.questionSubject
+      .asObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(q => {
+        this.question = q;
+        this.selectedAnswer = -1;
+        this.hideAnswers();
+        this.jpf = Math.ceil(Math.random() * 7);
+      });
 
-    this.answerRemoverSubscription = this.answerRemover.asObservable().subscribe(i => {
-      this.hideAnswer(i);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.questionSubscription.unsubscribe();
-    this.answerRemoverSubscription.unsubscribe();
+    this.answerRemover
+      .asObservable()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(i => {
+        this.hideAnswer(i);
+      });
   }
 
   get getTitle() {
@@ -85,7 +90,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   private hideAnswers() {
-    this.question.answers.forEach((a, i) => this.hideAnswer(i));
+    this.question.answers.forEach((_, i) => this.hideAnswer(i));
   }
 
   private hideAnswer(index: number) {
@@ -97,7 +102,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   lastWord() {
-    if (this.selectedAnswer !== -1) {
+    if (this.selectedAnswer !== -1 && this.question.rightAnswer !== undefined) {
       if (this.question.rightAnswer % 2 !== 0) {
         this.answerClasses[this.question.rightAnswer] = `answer answer-right answer-right${AnswerState.CORRECT}`;
       } else {

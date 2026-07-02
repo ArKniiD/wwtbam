@@ -1,7 +1,7 @@
 export class StrawPoll {
-  title: string;
-  description: string;
-  answers: string[];
+  title: string = '';
+  description: string = '';
+  answers: string[] = [];
   priv = true;
   ma = 0;
   mip = 0;
@@ -9,7 +9,7 @@ export class StrawPoll {
   vpn = 0;
   enter_name = 0;
   has_deadline = true;
-  deadline: string;
+  deadline: string = '';
   only_reg = 0;
   has_image = 0;
   image = null;

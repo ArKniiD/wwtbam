@@ -1,21 +1,31 @@
-<div id="jokers">
+<div id="jokers" class="blur-background">
+  <div id="generate-quizz">
+    <button (click)="generateQuizz()">Generate quizz about</button>
+    <input [(ngModel)]="theme" placeholder="Enter theme" type="text">
+  </div>
   <div>
     <app-jokers (callJokerEvent)="callJokerUsed()"
                 (fiftyFiftyJokerEvent)="fiftyFiftyJokerUsed()"
                 [question]="questions[currentQuestion]"></app-jokers>
   </div>
 </div>
-<div id="pyramid">
-  <div *ngFor="let q of questions.reverse(); let i = index;" [class]="(questions.length - i -1) === currentQuestion ? 'current-level' : '' " (click)="selectQuestion(questions.length - i -1)">
-      <p [class]="i%5 === 0 ? 'level' : '' ">
-        <i *ngIf="i===10" class="fas fa-beer"></i>
-        <i *ngIf="i===5" class="fas fa-wine-glass-alt"></i>
-        <i *ngIf="i===0" class="fas fa-glass-whiskey"></i>
+<div id="pyramid" class="blur-background">
+  @for (q of reversedQuestions; track $index; let i = $index) {
+    <div [class]="(questions.length - i -1) === currentQuestion ? 'current-level' : '' " (click)="selectQuestion(questions.length - i -1)">
+      <p [class]="i % 5 === 0 ? 'level' : '' ">
+        @if (i === 10) {
+          <i class="fas fa-beer"></i>
+        } @else if (i === 5) {
+          <i class="fas fa-wine-glass-alt"></i>
+        } @else if (i === 0) {
+          <i class="fas fa-glass-whiskey"></i>
+        }
         <span>{{questions.length - i}}</span>
         <i [class]="(questions.length - i) <= currentQuestion ? 'fas fa-check' : 'fas fa-minus'"></i>
         {{q.value}} €
       </p>
-  </div>
+    </div>
+  }
 </div>
 <app-question [questionSubject]="questionSubject"
               [answerRemover]="answerRemover"
@@ -28,9 +38,9 @@
 <audio #final (ended)="readingFinalAnswer=false;"><source src="../assets/sound/final-answer.mp3" type="audio/mpeg"></audio>
 <audio #phone (ended)="readingPhoneCall=false;"><source src="../assets/sound/phone-a-friend.mp3" type="audio/mpeg"></audio>
 <audio #fifty (ended)="readingFiftyFifty=false;"><source src="../assets/sound/5050.mp3" type="audio/mpeg"></audio>
-<audio #lowstress (ended)="readingStress=false;"><source src="../assets/sound/low-stress.mp3" type="audio/mpeg"></audio>
-<audio #mediumstress (ended)="readingStress=false;"><source src="../assets/sound/medium-stress.mp3" type="audio/mpeg"></audio>
-<audio #highstress (ended)="readingStress=false;"><source src="../assets/sound/high-stress.mp3" type="audio/mpeg"></audio>
+<audio #lowstress (ended)="readingLowStress=false;"><source src="../assets/sound/low-stress.mp3" type="audio/mpeg"></audio>
+<audio #mediumstress (ended)="readingMediumStress=false;"><source src="../assets/sound/medium-stress.mp3" type="audio/mpeg"></audio>
+<audio #highstress (ended)="readingHighStress=false;"><source src="../assets/sound/high-stress.mp3" type="audio/mpeg"></audio>
 
 
 

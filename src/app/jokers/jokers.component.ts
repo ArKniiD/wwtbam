@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild, inject } from '@angular/core';
 import { interval, timer } from 'rxjs';
 import { first, map, takeUntil } from 'rxjs/operators';
 import { StrawPollService } from '../services/straw-poll.service';
@@ -9,28 +9,30 @@ const THREEPIBYTWO = (3 * Math.PI) / 2;
 @Component({
   selector: 'app-jokers',
   templateUrl: './jokers.component.html',
-  styleUrls: ['./jokers.component.scss']
+  styleUrls: ['./jokers.component.scss'],
+  standalone: true
 })
 export class JokersComponent implements OnInit {
-  @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement>;
-  private ctx: CanvasRenderingContext2D;
+  @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
+  private ctx!: CanvasRenderingContext2D;
   private sec = 43;
-  private callJokerUsed = false;
-  private fiftyFiftyJokerUsed = false;
-  private pollJokerUrl = '';
+  callJokerUsed = false;
+  fiftyFiftyJokerUsed = false;
+  pollJokerUrl = '';
+  private poll = inject(StrawPollService);
 
   @Output()
   callJokerEvent = new EventEmitter<any>();
   @Output()
   fiftyFiftyJokerEvent = new EventEmitter<any>();
   @Input()
-  question: Question;
+  question!: Question;
 
-  constructor(private poll: StrawPollService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.ctx = this.canvas.nativeElement.getContext('2d');
+    this.ctx = this.canvas.nativeElement.getContext('2d')!;
     this.init();
     this.draw(this.sec);
   }
@@ -40,14 +42,14 @@ export class JokersComponent implements OnInit {
     this.canvas.nativeElement.height = 200;
   }
 
-  draw(time) {
+  draw(time: number) {
     const centerX = this.canvas.nativeElement.width / 2;
     const centerY = this.canvas.nativeElement.height / 2;
 
     const radS = (2 * time * Math.PI) / this.sec;
 
-    const minThreshold = 0;
-    const maxThreshold = 255;
+    const minThreshold = 50;
+    const maxThreshold = 200;
 
     let green;
     let red;
@@ -65,31 +67,31 @@ export class JokersComponent implements OnInit {
     this.drawRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height, 'transparent');
     this.drawCircle(centerX, centerY, 85, 0, Math.PI * 2, false, '#6485c3', 'stroke', 30); //secondgrey
     this.drawCircle(centerX, centerY, 85, THREEPIBYTWO, radS + THREEPIBYTWO, false, `rgb(${Math.round(red)},${Math.round(green)},${blue})`, 'stroke', 30); //second
-    this.drawCircle(centerX, centerY, 70, 0, Math.PI * 2, false, '#231f20', 'fill', '50'); //inner
+    this.drawCircle(centerX, centerY, 70, 0, Math.PI * 2, false, '#231f20', 'fill', 50); //inner
     if (time < 10) {
-      this.drawText(`${time}`, this.canvas.nativeElement.width / 2 - 20, this.canvas.nativeElement.height / 2 + 22, '#ffffff', '60px');
+      this.drawText(`${time}`, this.canvas.nativeElement.width / 2 - 20, this.canvas.nativeElement.height / 2 + 22, '#ffffff', 60);
     } else {
-      this.drawText(`${time}`, this.canvas.nativeElement.width / 2 - 38, this.canvas.nativeElement.height / 2 + 22, '#ffffff', '60px');
+      this.drawText(`${time}`, this.canvas.nativeElement.width / 2 - 30, this.canvas.nativeElement.height / 2 + 22, '#ffffff', 60);
     }
   }
 
-  drawText(text, x, y, color, size) {
-    this.ctx.font = `${size} "DejaVu Sans Light"`;
+  drawText(text: string, x: number, y: number, color: string, size: number) {
+    this.ctx.font = `${size}px "DynaPuff","DejaVu Sans Light"`;
     this.ctx.fillStyle = color;
     this.ctx.fillText(text, x, y);
   }
 
-  drawRect(x, y, width, height, color) {
+  drawRect(x: number, y: number, width: number, height: number, color: string) {
     this.ctx.fillStyle = color;
     this.ctx.fillRect(x, y, width, height);
   }
 
-  drawArc(x, y, radius, start, end, clockwise) {
+  drawArc(x: number, y: number, radius: number, start: number, end: number, clockwise: boolean) {
     this.ctx.beginPath();
     this.ctx.arc(x, y, radius, start, end, clockwise);
   }
 
-  drawCircle(x, y, radius, start, end, clockwise, color, type, thickness) {
+  drawCircle(x: number, y: number, radius: number, start: number, end: number, clockwise: boolean, color: string, type: string, thickness: number) {
     if (type === 'fill') {
       this.ctx.fillStyle = color;
       this.drawArc(x, y, radius, start, end, clockwise);
@@ -107,7 +109,7 @@ export class JokersComponent implements OnInit {
       this.callJokerEvent.emit();
       timer(0, 1000)
         .pipe(takeUntil(interval(this.sec * 1000).pipe(
-          map(j => {
+          map(() => {
             this.callJokerUsed = true;
           })
         )))

@@ -1,56 +1,66 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Subject, pipe } from 'rxjs';
+import { Component, ElementRef, HostListener, OnInit, Signal, inject, viewChild, ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Question } from '../models/question';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { QuizzService } from '../services/quizz.service';
 import { switchMap, filter, first } from 'rxjs/operators';
+import { QuestionComponent } from '../question/question.component';
+import { JokersComponent } from '../jokers/jokers.component';
+import { FormsModule } from '@angular/forms';
 
 
 export enum KEY_CODE {
-  ONE = 49,
-  TWO = 50,
-  THREE = 51,
-  FOUR = 52,
-  FIVE = 53,
-  SIX = 54,
-  SEVEN = 55,
-  HEIGHT = 56
+  ONE = '1',
+  TWO = '2',
+  THREE = '3',
+  FOUR = '4',
+  FIVE = '5',
+  SIX = '6',
+  SEVEN = '7',
+  EIGHT = '8'
 }
 
 @Component({
-  selector: 'play',
+  selector: 'app-play',
   templateUrl: './play.component.html',
-  styleUrls: ['./play.component.scss']
+  styleUrls: ['./play.component.scss'],
+  imports: [QuestionComponent, JokersComponent, FormsModule],
+  standalone: true
 })
 export class PlayComponent implements OnInit {
-  @ViewChild('commercial', { static: true }) commercialBreak: ElementRef<HTMLAudioElement>;
-  @ViewChild('correct', { static: true }) correctAnswer: ElementRef<HTMLAudioElement>;
-  @ViewChild('wrong', { static: true }) wrongAnswer: ElementRef<HTMLAudioElement>;
-  @ViewChild('final', { static: true }) finalAnswer: ElementRef<HTMLAudioElement>;
-  @ViewChild('phone', { static: true }) phoneCall: ElementRef<HTMLAudioElement>;
-  @ViewChild('fifty', { static: true }) fiftyFifty: ElementRef<HTMLAudioElement>;
-  @ViewChild('lowstress', { static: true }) lowStress: ElementRef<HTMLAudioElement>;
-  @ViewChild('mediumstress', { static: true }) mediumStress: ElementRef<HTMLAudioElement>;
-  @ViewChild('highstress', { static: true }) highStress: ElementRef<HTMLAudioElement>;
+  commercialBreak = viewChild<ElementRef<HTMLAudioElement>>('commercial');
+  correctAnswer = viewChild<ElementRef<HTMLAudioElement>>('correct');
+  wrongAnswer = viewChild<ElementRef<HTMLAudioElement>>('wrong');
+  finalAnswer = viewChild<ElementRef<HTMLAudioElement>>('final');
+  phoneCall = viewChild<ElementRef<HTMLAudioElement>>('phone');
+  fiftyFifty = viewChild<ElementRef<HTMLAudioElement>>('fifty');
+  lowStress = viewChild<ElementRef<HTMLAudioElement>>('lowstress');
+  mediumStress = viewChild<ElementRef<HTMLAudioElement>>('mediumstress');
+  highStress = viewChild<ElementRef<HTMLAudioElement>>('highstress');
 
 
   questionSubject: BehaviorSubject<Question>;
   answerRemover: Subject<number>;
   title = 'wwtbam';
-  currentQuestion: number
+  currentQuestion = 0;
   questions: Question[];
+  theme: string = '';
 
-  private readingCommercial = true;
-  private readingCorrectAnswer = false;
-  private readingWrongAnswer = false;
-  private readingFinalAnswer = false;
-  private readingPhoneCall = false;
-  private readingFiftyFifty = false;
-  private readingLowStress = false;
-  private readingMediumStress = false;
-  private readingHighStress = false;
+  readingCommercial = false;
+  readingCorrectAnswer = false;
+  readingWrongAnswer = false;
+  readingFinalAnswer = false;
+  readingPhoneCall = false;
+  readingFiftyFifty = false;
+  readingLowStress = false;
+  readingMediumStress = false;
+  readingHighStress = false;
 
-  constructor(private route: ActivatedRoute, private quizzService: QuizzService) {
+  private route = inject(ActivatedRoute);
+  private quizzService = inject(QuizzService);
+  private cdr = inject(ChangeDetectorRef);
+
+  constructor() {
     this.questions = [{
       label: '',
       answers: []
@@ -59,9 +69,14 @@ export class PlayComponent implements OnInit {
     this.answerRemover = new Subject();
   }
 
+  get reversedQuestions(): Question[] {
+    return [...this.questions].reverse();
+  }
+
   selectQuestion(index: number) {
     this.currentQuestion = index;
     this.questionSubject.next(this.questions[this.currentQuestion]);
+    this.cdr.markForCheck();
   }
 
   ngOnInit(): void {
@@ -74,103 +89,72 @@ export class PlayComponent implements OnInit {
     ).subscribe(questions => {
       this.questions = questions;
       this.selectQuestion(0);
+      this.playCommercialBreak();
+      this.cdr.markForCheck();
     });
-    this.playCommercialBreak();
+    
+  }
+
+  generateQuizz(): void {
+    if (this.theme.trim()) {
+      this.quizzService.generateQuizz(this.theme).subscribe(questions => {
+        this.questions = questions;
+        this.selectQuestion(0);
+        this.playCommercialBreak();
+        this.cdr.markForCheck();
+      });
+    }
+  }
+
+  private toggleAudio(player: Signal<ElementRef<HTMLAudioElement> | undefined>, isPlaying: boolean): boolean {
+    player()?.nativeElement.load();
+    if (!isPlaying) {
+      player()?.nativeElement.play();
+      return true;
+    }
+    return false;
   }
 
   playCommercialBreak() {
-    this.commercialBreak.nativeElement.load();
-    if (!this.readingCommercial) {
-      this.commercialBreak.nativeElement.play();
-      this.readingCommercial = true;
-    } else {
-      this.readingCommercial = false;
-    }
+    this.readingCommercial = this.toggleAudio(this.commercialBreak, this.readingCommercial);
   }
 
   playCorrectAnswer() {
-    this.correctAnswer.nativeElement.load();
-    if (!this.readingCorrectAnswer) {
-      this.correctAnswer.nativeElement.play();
-      this.readingCorrectAnswer = true;
-    } else {
-      this.readingCorrectAnswer = false;
-    }
+    this.readingCorrectAnswer = this.toggleAudio(this.correctAnswer, this.readingCorrectAnswer);
   }
 
   playWrongAnswer() {
-    this.wrongAnswer.nativeElement.load();
-    if (!this.readingWrongAnswer) {
-      this.wrongAnswer.nativeElement.play();
-      this.readingWrongAnswer = true;
-    } else {
-      this.readingWrongAnswer = false;
-    }
+    this.readingWrongAnswer = this.toggleAudio(this.wrongAnswer, this.readingWrongAnswer);
   }
 
   playFinalAnswer() {
-    this.finalAnswer.nativeElement.load();
-    if (!this.readingFinalAnswer) {
-      this.finalAnswer.nativeElement.play();
-      this.readingFinalAnswer = true;
-    } else {
-      this.readingFinalAnswer = false;
-    }
+    this.readingFinalAnswer = this.toggleAudio(this.finalAnswer, this.readingFinalAnswer);
   }
 
   playPhoneCall() {
-    this.phoneCall.nativeElement.load();
-    if (!this.readingPhoneCall) {
-      this.phoneCall.nativeElement.play();
-      this.readingPhoneCall = true;
-    } else {
-      this.readingPhoneCall = false;
-    }
+    this.readingPhoneCall = this.toggleAudio(this.phoneCall, this.readingPhoneCall);
   }
 
   play5050() {
-    this.fiftyFifty.nativeElement.load();
-    if (!this.readingFiftyFifty) {
-      this.fiftyFifty.nativeElement.play();
-      this.readingFiftyFifty = true;
-    } else {
-      this.readingFiftyFifty = false;
-    }
+    this.readingFiftyFifty = this.toggleAudio(this.fiftyFifty, this.readingFiftyFifty);
   }
 
   playLowStress() {
-    this.lowStress.nativeElement.load();
-    if (!this.readingLowStress) {
-      this.lowStress.nativeElement.play();
-      this.readingLowStress = true;
-    } else {
-      this.readingLowStress = false;
-    }
+    this.readingLowStress = this.toggleAudio(this.lowStress, this.readingLowStress);
   }
 
   playMediumStress() {
-    this.mediumStress.nativeElement.load();
-    if (!this.readingMediumStress) {
-      this.mediumStress.nativeElement.play();
-      this.readingMediumStress = true;
-    } else {
-      this.readingMediumStress = false;
-    }
+    this.readingMediumStress = this.toggleAudio(this.mediumStress, this.readingMediumStress);
   }
 
   playHighStress() {
-    this.highStress.nativeElement.load();
-    if (!this.readingHighStress) {
-      this.highStress.nativeElement.play();
-      this.readingHighStress = true;
-    } else {
-      this.readingHighStress = false;
-    }
+    this.readingHighStress = this.toggleAudio(this.highStress, this.readingHighStress);
   }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    switch (event.keyCode) {
+    console.debug(`Key pressed: ${event.key}`);
+    switch (event.key) {
       case KEY_CODE.ONE:
         this.playCommercialBreak();
         break;
@@ -190,18 +174,18 @@ export class PlayComponent implements OnInit {
         this.playLowStress();
         break;
       case KEY_CODE.SEVEN:
-          this.playMediumStress();
-          break;
-      case KEY_CODE.HEIGHT:
-          this.playHighStress();
-          break;
+        this.playMediumStress();
+        break;
+      case KEY_CODE.EIGHT:
+        this.playHighStress();
+        break;
       default:
-        console.error('Unrecognized key', event);
+        break;
     }
   }
 
   correctAnswered() {
-    this.finalAnswer.nativeElement.load();
+    this.finalAnswer()?.nativeElement.load();
     this.readingFinalAnswer = false;
     this.playCorrectAnswer();
     setTimeout(() => this.selectQuestion(this.currentQuestion + 1), 7000);
@@ -209,7 +193,7 @@ export class PlayComponent implements OnInit {
 
 
   wrongAnswered() {
-    this.finalAnswer.nativeElement.load();
+    this.finalAnswer()?.nativeElement.load();
     this.readingFinalAnswer = false;
     this.playWrongAnswer();
   }
@@ -219,7 +203,7 @@ export class PlayComponent implements OnInit {
   }
 
   answerSelected() {
-    this.finalAnswer.nativeElement.load();
+    this.finalAnswer()?.nativeElement.load();
     this.readingFinalAnswer = false;
     this.playFinalAnswer();
   }

@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Question } from '../models/question';
@@ -10,9 +10,7 @@ import { StrawPoll } from '../models/straw-poll';
 })
 export class StrawPollService {
   private url = 'https://strawpoll.com';
-
-  constructor(private http: HttpClient) {
-  }
+  private http: HttpClient = inject(HttpClient);
 
   createPoll(question: Question): Observable<string> {
     const tommorow = new Date();

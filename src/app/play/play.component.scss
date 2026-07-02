@@ -1,13 +1,11 @@
 #pyramid{
   height: 100%;
-  width: 20%;
-  min-width: 430px;
-  position: fixed; right: -20%; top: 0;
+  width: 15%;
+  min-width: 200px;
+  position: fixed; right: -10%; top: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
-  -moz-box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
-  box-shadow: 0 0 10px 5px rgba(255,255,255,0.5);
   transition: right 0.5s;
+  z-index: 10;
 
   &:hover {
     right: 0;
@@ -35,7 +33,7 @@
     }
 
     p {
-      margin: auto 50px;
+      margin: auto 20px;
       span {
         width: 50px;
         display: inline-block;
@@ -51,17 +49,60 @@
 
 #jokers {
   height: 100%;
-  width: 20%;
-  min-width: 430px;
-  position: fixed; left: -20%; top: 0;
+  width: 15%;
+  min-width: 200px;
+  position: fixed; left: -10%; top: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  -webkit-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
   transition: left 0.5s;
+  z-index: 10;
 
   &:hover {
     left: 0;
     transition: left 0.5s;
   }
+}
+
+#generate-quizz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+  margin: 20px auto;
+  width: fit-content;
+
+  input {
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: 2px solid rgb(74, 144, 226);
+    background: white;
+    color: rgb(51, 51, 51);
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    font-family: "DynaPuff","DejaVu Sans ExtraLight", "Arial", sans-serif;
+  }
+
+  button {
+    padding: 12px 30px;
+    border-radius: 25px;
+    background: linear-gradient(135deg, rgb(110, 142, 251), rgb(167, 119, 227));
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 15px;
+    width: 100%;
+    font-family: "DynaPuff","DejaVu Sans ExtraLight", "Arial", sans-serif;
+  }
+}
+
+.blur-background {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.37) 0px 8px 32px 0px;
 }
